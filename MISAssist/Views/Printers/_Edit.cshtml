@@ -1,0 +1,129 @@
+﻿@model MISAssist.Models.printer
+@{
+    ViewBag.Title = "_Edit";
+}
+<!-- Modal content-->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-header modal-header-primary">
+        <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">印表機［編輯］</h4>
+    </div>
+    <div id="detailBody" class="modal-body">
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.department, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.department, (List<SelectListItem>)ViewBag.dept, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.department, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.brand, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.brand, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.model, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.model, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.model, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.type, (List<SelectListItem>)ViewBag.ptype, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.vender, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.vender, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.vender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control", type = "date", @Value=((DateTime)Model.date).ToString("yyyy-MM-dd") } })
+                    @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ip, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ip, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ip, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cartridge_black, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cartridge_black, new { htmlAttributes = new { @class = "form-control", style = "color:black;font-weight:bold" } })
+                    @Html.ValidationMessageFor(model => model.cartridge_black, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cartridge_blue, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cartridge_blue, new { htmlAttributes = new { @class = "form-control", style = "color:deepskyblue;font-weight:bold" } })
+                    @Html.ValidationMessageFor(model => model.cartridge_blue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cartridge_red, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cartridge_red, new { htmlAttributes = new { @class = "form-control", style = "color:red;font-weight:bold" } })
+                    @Html.ValidationMessageFor(model => model.cartridge_red, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cartridge_yellow, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cartridge_yellow, new { htmlAttributes = new { @class = "form-control", style = "color:orange;font-weight:bold" } })
+                    @Html.ValidationMessageFor(model => model.cartridge_yellow, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.note, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.note, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.note, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer modal-footer-primary">
+        <button type="submit" class="btn btn-default">儲存</button>
+        @*Html.ActionLink("返回", "Index", new { dept = @Html.DisplayFor(model => model.department) }, new { @class = "btn btn-default" }) *@
+        <button type="button" class="btn btn-default" aria-label="Close" data-dismiss="modal">返回</button>
+    </div>
+}

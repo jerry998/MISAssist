@@ -1,0 +1,129 @@
+﻿@model MISAssist.Models.equipment
+
+@{
+    ViewBag.Title = "Delete";
+}
+<br />
+<span class="label label-primary" style="font-size:20px; height:30px;">&nbsp;資訊設備&nbsp;</span>
+
+<h4>刪除</h4>
+<div>
+    <h3>您確定要刪除這筆資料嗎？</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.department)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ftype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ftype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.feature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.feature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.op)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.op)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.op_bit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.op_bit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.op_copyright)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.op_copyright)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.db)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.db)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.office)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.office)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.offcie_copyright)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.offcie_copyright)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.antivirus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.antivirus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn btn-default" /> |
+            @Html.ActionLink("返回", "Index")
+        </div>
+    }
+</div>

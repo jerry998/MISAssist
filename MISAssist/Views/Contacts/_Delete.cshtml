@@ -1,0 +1,73 @@
+﻿@model MISAssist.Models.contact
+@{
+    ViewBag.Title = "_Delete";
+}
+<!-- Modal content-->
+<div class="modal-header modal-header-primary">
+    <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">聯絡人［刪除］</h4>
+</div>
+<div id="detailBody" class="modal-body">
+    <dl class="dl-horizontal">
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.department)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.tel_office)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tel_office)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.tel_ext)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tel_ext)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.tel_mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tel_mobile)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+    </dl>
+</div>
+<div class="modal-footer modal-footer-primary">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <div class="form-actions no-color">
+        <span style="font-size:large;font-weight:bold;color:red">確定要刪除嗎？&nbsp;</span>
+        <button type="submit" class="btn btn-default">刪除</button>
+        @*Html.ActionLink("返回", "Index", new { dept = @Html.DisplayFor(model => model.department) }, new { @class = "btn btn-default" }) *@
+        <button type="button" class="btn btn-default" aria-label="Close" data-dismiss="modal">返回</button>
+    </div>
+    }
+</div>

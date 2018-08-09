@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MISAssist.Models.cart_transaction>
+@{
+    ViewBag.Title = "_Details";
+}
+<!-- Modal content-->
+<div class="modal-header modal-header-primary">
+    <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">碳粉匣［詳細］</h4>
+</div>
+<div id="detailBody" class="modal-body">
+    <table class="table">
+        @if (Model != null && Model.Count() != 0)
+        {
+            <caption style="color:black;font-weight:bold" >
+                @Html.DisplayNameFor(model => model.cartridge) : <span style = "color:@ViewBag.color;font-weight:bold">@Html.DisplayFor(model => model.First().cartridge)</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.DisplayNameFor(model => model.printer.department) : @Html.DisplayFor(model => model.First().printer.department)
+            </caption>
+        }
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.in_out)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.in_out)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>
+            </tr>
+        }
+</table>
+</div>
+
+<div class="modal-footer modal-footer-primary">
+    @*Html.ActionLink("返回", "Index", "Printers", new { dept = "" }, new { @class = "btn btn-default" }) *@
+    <button type="button" class="btn btn-default" aria-label="Close" data-dismiss="modal">返回</button>
+</div>

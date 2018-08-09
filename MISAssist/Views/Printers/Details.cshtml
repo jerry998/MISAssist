@@ -1,0 +1,122 @@
+﻿@model MISAssist.Models.printer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>printer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.department)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cartridge_black)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cartridge_black)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cartridge_blue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cartridge_blue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cartridge_red)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cartridge_red)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cartridge_yellow)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cartridge_yellow)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

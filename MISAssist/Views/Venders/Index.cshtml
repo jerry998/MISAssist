@@ -1,0 +1,155 @@
+﻿@model IEnumerable<MISAssist.Models.vender>
+
+@{
+    ViewBag.Title = "Index";
+}
+<p>
+    @using (Html.BeginForm("Index", "Venders", FormMethod.Get))
+    {
+        <span class="label label-primary" style="font-size:20px; height:30px;">&nbsp;&nbsp;廠商&nbsp;&nbsp;</span>
+        <span>&nbsp; &nbsp;</span>
+        @Html.DropDownList("company", (List<SelectListItem>)ViewBag.vender_index, new { @class = "btn btn-default" })
+        <span>&nbsp;&nbsp;<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></span>
+        <span>&nbsp;<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button></span>
+    }
+</p>
+<table class="table table-striped" id="head_fixed_Venders">
+    <thead>
+        <tr>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.company)
+            </th>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.contact)
+            </th>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.tel_office)
+            </th>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.tel_mobile)
+            </th>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.fax)
+            </th>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.quick_no)
+            </th>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.note)
+            </th>
+            <th style="text-align:center;">功能</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.company)&nbsp;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contact)&nbsp;
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.title)&nbsp;
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.tel_office)&nbsp;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tel_mobile)&nbsp;
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.fax)&nbsp;
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.quick_no)&nbsp;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.note)&nbsp;
+                </td>
+                <td style="text-align:center;">
+                    @Html.ActionLink(" ", "_Edit", new { id = item.id }, new { @class = "glyphicon glyphicon-pencil", data_target = "#editModal", data_toggle = "modal" }) |
+                    @Html.ActionLink(" ", "_Details", new { id = item.id }, new { @class = "glyphicon glyphicon-list-alt", data_target = "#detailModal", data_toggle = "modal" }) |
+                    @Html.ActionLink(" ", "_Delete", new { id = item.id }, new { @class = "glyphicon glyphicon-remove", data_target = "#deleteModal", data_toggle = "modal" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    .form-group {
+        margin-bottom: 5px;
+    }
+</style>
+
+<!-- Add -->
+@Html.Action("_Create", new { company = @Html.DisplayNameFor(model => model.company) })
+
+<!-- Details -->
+<div id="detailModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!-- Edit -->
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!-- Delete -->
+<div id="deleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#head_fixed_Venders').DataTable({
+                scrollY: "400px",
+                scrollX: true,
+                scrollCollapse: true,
+                autoWidth: true,
+                paging: true,
+                fixedColumns: {
+                    leftColumns: 1,
+                    rightColumns: 1
+                },
+                columnDefs: [
+                    { "width": "140px", "targets": [0, 7] },
+                    { "width": "90px", "targets": [1, 2, 3, 4,  5] },
+                    { "width": "60px", "targets": [6, 8] }
+                ]
+            });
+        });
+
+        //destroy the Modal object before subsequent toggles. because remote modal shows same content every time
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+
+        //make bootstrap twitter dialog modal draggable
+        $(".modal-dialog").draggable({
+            handle: ".modal-header"
+        });
+    </script>
+}

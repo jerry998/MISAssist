@@ -1,0 +1,217 @@
+﻿@model IEnumerable<MISAssist.Models.printer>
+@using MISAssist.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+<p>
+    @using (Html.BeginForm("Index", "Printers", FormMethod.Get))
+    {
+        <span class="label label-primary" style="font-size:20px; height:30px;">&nbsp;印表機&nbsp;</span>
+        <span>&nbsp; &nbsp;</span>
+        @Html.DropDownList("dept", (List<SelectListItem>)ViewBag.dept_index, new { @class = "btn btn-default" })
+        <span>&nbsp;&nbsp;<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></span>
+        <span>&nbsp;<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button></span>
+    }
+</p>
+<table class="table table-striped" id="head_fixed_Printers">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ip)
+            </th>
+            <th>
+                黑
+            </th>
+            <th>
+                青
+            </th>
+            <th>
+                紅
+            </th>
+            <th>
+                黃
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.note)
+            </th>
+            <th>功能</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.department)&nbsp;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.brand)&nbsp;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.model)&nbsp;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ip)&nbsp;
+                </td>
+                <td style="color:black;font-weight:bold">
+                    @{
+                        var c = " ";
+                        if (!string.IsNullOrEmpty(item.cartridge_black))
+                        {
+                            var a = item.cart_transaction.Where(t => t.cartridge == item.cartridge_black).Where(t => t.in_out == "入").Sum(t => t.quantity);
+                            var b = item.cart_transaction.Where(t => t.cartridge == item.cartridge_black).Where(t => t.in_out == "出").Sum(t => t.quantity);
+                            c = "(" + (a - b) + ")";
+                        }
+                        else
+                        {
+                            c = " ";
+                        }
+                    }
+                    @Html.ActionLink(" " + item.cartridge_black + c , "_Details", "cart_transaction", new { printer_id=item.id, cartridge = item.cartridge_black, color = "black" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:black;font-weight:bold" })&nbsp;
+                </td>
+                <td style="color:deepskyblue;font-weight:bold">
+                    @{
+                        if (!string.IsNullOrEmpty(item.cartridge_blue))
+                        {
+                            var a = item.cart_transaction.Where(t => t.cartridge == item.cartridge_blue).Where(t => t.in_out == "入").Sum(t => t.quantity);
+                            var b = item.cart_transaction.Where(t => t.cartridge == item.cartridge_blue).Where(t => t.in_out == "出").Sum(t => t.quantity);
+                            c = "(" + (a - b) + ")";
+                        }
+                        else
+                        {
+                            c = " ";
+                        }
+                    }
+                    @Html.ActionLink(" " + item.cartridge_blue + c, "_Details", "cart_transaction", new { printer_id = item.id, cartridge = item.cartridge_blue, color = "blue" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:blue;font-weight:bold" })&nbsp;
+                </td>
+                <td style="color:red;font-weight:bold">
+                    @{
+                        if (!string.IsNullOrEmpty(item.cartridge_red))
+                        {
+                            var a = item.cart_transaction.Where(t => t.cartridge == item.cartridge_red).Where(t => t.in_out == "入").Sum(t => t.quantity);
+                            var b = item.cart_transaction.Where(t => t.cartridge == item.cartridge_red).Where(t => t.in_out == "出").Sum(t => t.quantity);
+                            c = "(" + (a - b) + ")";
+                        }
+                        else
+                        {
+                            c = " ";
+                        }
+                    }
+                    @Html.ActionLink(" " + item.cartridge_red + c, "_Details", "cart_transaction", new { printer_id = item.id, cartridge = item.cartridge_red, color = "red" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:red;font-weight:bold" })&nbsp;
+                </td>
+                <td style="color:orange;font-weight:bold">
+                    @{
+                        if (!string.IsNullOrEmpty(item.cartridge_yellow))
+                        {
+                            var a = item.cart_transaction.Where(t => t.cartridge == item.cartridge_yellow).Where(t => t.in_out == "入").Sum(t => t.quantity);
+                            var b = item.cart_transaction.Where(t => t.cartridge == item.cartridge_yellow).Where(t => t.in_out == "出").Sum(t => t.quantity);
+                            c = "(" + (a - b) + ")";
+                        }
+                        else
+                        {
+                            c = " ";
+                        }
+                    }
+                    @Html.ActionLink(" " + item.cartridge_yellow + c, "_Details", "cart_transaction", new { printer_id = item.id, cartridge = item.cartridge_yellow, color = "orange" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:orange;font-weight:bold" })&nbsp;
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.note)&nbsp;
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "_Edit", new { id = item.id }, new { @class = "glyphicon glyphicon-pencil", data_target = "#editModal", data_toggle = "modal" }) |
+                    @Html.ActionLink(" ", "_Details", new { id = item.id }, new { @class = "glyphicon glyphicon-list-alt", data_target = "#detailModal", data_toggle = "modal" }) |
+                    @Html.ActionLink(" ", "_Delete", new { id = item.id }, new { @class = "glyphicon glyphicon-remove", data_target = "#deleteModal", data_toggle = "modal" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    .form-group {
+        margin-bottom: 5px;
+    }
+</style>
+
+<!-- Add -->
+@Html.Action("_Create", new { dept = @Html.DisplayNameFor(model => model.department) })
+
+<!-- Details -->
+<div id="detailModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!-- Edit -->
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!-- Delete -->
+<div id="deleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!-- Cart_Transaction -->
+<div id="cartModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#head_fixed_Printers').DataTable({
+                scrollY: "400px",
+                scrollX: true,
+                scrollCollapse: true,
+                autoWidth: true,
+                paging: true,
+                searching: true,
+                columnDefs: [
+                    { "width": "110px", "targets": [3, 8] },
+                    { "width": "70px", "targets": [0, 1, 2, 4, 5, 6, 7, 9] }
+                ]
+            });
+        });
+
+        //destroy the Modal object before subsequent toggles. because remote modal shows same content every time
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+
+        //make bootstrap twitter dialog modal draggable
+        $(".modal-dialog").draggable({
+            handle: ".modal-header"
+        });
+    </script>
+}

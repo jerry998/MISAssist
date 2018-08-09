@@ -1,0 +1,74 @@
+﻿@model MISAssist.Models.cart_transaction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>cart_transaction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cartridge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cartridge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.in_out)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.in_out)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.printer.department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.printer.department)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

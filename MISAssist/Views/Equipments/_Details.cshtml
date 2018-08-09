@@ -1,0 +1,122 @@
+﻿@model MISAssist.Models.equipment
+@{
+    ViewBag.Title = "Details";
+}
+<!-- Modal content-->
+<div class="modal-header modal-header-primary">
+    <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">資訊設備［詳細］</h4>
+</div>
+<div id="detailBody" class="modal-body">
+    <dl class="dl-horizontal">
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.department)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.ftype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ftype)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.feature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.feature)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.ip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ip)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.op)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.op)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.op_bit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.op_bit)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.op_copyright)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.op_copyright)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.db)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.db)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.office)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.office)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.offcie_copyright)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.offcie_copyright)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.antivirus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.antivirus)
+        </dd>
+
+        <dt style="height:26px">
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+    </dl>
+</div>
+<div class="modal-footer modal-footer-primary">
+    @Html.ActionLink("編輯", "_Edit", new { id = @Html.DisplayFor(model => model.id) }, new { @class = "btn btn-default", data_target = "#editModal", data_toggle = "modal" })
+    @*Html.ActionLink("返回", "Index", new { dept = @Html.DisplayFor(model => model.department) }, new { @class = "btn btn-default" }) *@
+    <button type="button" class="btn btn-default" aria-label="Close" data-dismiss="modal">返回</button>
+</div>

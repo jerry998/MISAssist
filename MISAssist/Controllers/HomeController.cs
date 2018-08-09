@@ -15,7 +15,7 @@ namespace MISAssist.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "仁愛之家．資訊室 ASP.NET MVC 應用程式.";
 
             return View();
         }
@@ -25,6 +25,14 @@ namespace MISAssist.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Time()
+        {
+            var time = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+            return Content(time);
         }
     }
 }

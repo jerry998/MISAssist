@@ -9,7 +9,12 @@ namespace MISAssist
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/DataTables/jquery.dataTables.min.js",
+                        "~/Scripts/DataTables/dataTables.fixedColumns.min.js",
+                        "~/Scripts/jquery-ui.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -20,11 +25,16 @@ namespace MISAssist
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/DataTables/css/jquery.dataTables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/my_css").Include(
+                      "~/Content/jerryStyle.css"));
         }
     }
 }
