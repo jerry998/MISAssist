@@ -208,9 +208,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\cart_transaction.cs">
-      <DependentUpon>MISAssist.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\AnnualCostViewModel.cs" />
+    <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\contact.cs">
       <DependentUpon>MISAssist.tt</DependentUpon>
     </Compile>
@@ -237,21 +236,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MISAssist.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Partials\cart_transaction.cs" />
     <Compile Include="Models\Partials\contact.cs" />
     <Compile Include="Models\Partials\equipment.cs" />
-    <Compile Include="Models\Partials\printer.cs" />
     <Compile Include="Models\Partials\vender.cs" />
-    <Compile Include="Models\printer.cs">
+    <Compile Include="Models\Partials\印表機.cs" />
+    <Compile Include="Models\Partials\異動記錄.cs" />
+    <Compile Include="Models\vender.cs">
       <DependentUpon>MISAssist.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\vender.cs">
+    <Compile Include="Models\印表機.cs">
+      <DependentUpon>MISAssist.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\異動記錄.cs">
       <DependentUpon>MISAssist.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-table.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -423,6 +426,12 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.structure.css" />
     <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\x-editable\bootstrap3-editable\css\bootstrap-editable.css" />
+    <Content Include="Content\x-editable\bootstrap3-editable\img\clear.png" />
+    <Content Include="Content\x-editable\bootstrap3-editable\img\loading.gif" />
+    <Content Include="Content\x-editable\jquery-editable\css\jquery-editable.css" />
+    <Content Include="Content\x-editable\jquery-editable\img\clear.png" />
+    <Content Include="Content\x-editable\jquery-editable\img\loading.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -437,6 +446,10 @@
       <DependentUpon>MISAssist.edmx</DependentUpon>
       <LastGenOutput>MISAssist.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap-table-editable.js" />
+    <Content Include="Scripts\bootstrap-table-zh-CN.min.js" />
+    <Content Include="Scripts\bootstrap-table-zh-TW.min.js" />
+    <Content Include="Scripts\bootstrap-table.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -452,6 +465,7 @@
     <Content Include="Models\MISAssist.edmx.diagram">
       <DependentUpon>MISAssist.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -517,6 +531,7 @@
     <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
     <Content Include="Scripts\DataTables\dataTables.uikit.js" />
     <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\editor.dataTables.min.css" />
     <Content Include="Scripts\DataTables\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTables\responsive.bootstrap.js" />
@@ -540,6 +555,30 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\x-editable\bootstrap3-editable\js\bootstrap-editable.js" />
+    <Content Include="Scripts\x-editable\bootstrap3-editable\js\bootstrap-editable.min.js" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\animated-overlay.gif" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\css\redmond\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\js\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Scripts\x-editable\jquery-editable\jquery-ui-datepicker\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Scripts\x-editable\jquery-editable\js\jquery-editable-poshytip.js" />
+    <Content Include="Scripts\x-editable\jquery-editable\js\jquery-editable-poshytip.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -618,6 +657,10 @@
     <Content Include="Views\cart_transaction\Edit.cshtml" />
     <Content Include="Views\cart_transaction\Index.cshtml" />
     <Content Include="Views\cart_transaction\_Details.cshtml" />
+    <Content Include="Views\cart_transaction\_Delete.cshtml" />
+    <Content Include="Views\cart_transaction\_Create.cshtml" />
+    <Content Include="Views\cart_transaction\_DetailsEditable.cshtml" />
+    <Content Include="Views\cart_transaction\_AnnualCost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

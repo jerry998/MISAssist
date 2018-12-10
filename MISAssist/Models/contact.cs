@@ -21,5 +21,7 @@ namespace MISAssist.Models
         public string tel_ext { get; set; }
         public string tel_mobile { get; set; }
         public string note { get; set; }
+        public string pno { get; set; }
+        public string title { get; set; }
     }
 }

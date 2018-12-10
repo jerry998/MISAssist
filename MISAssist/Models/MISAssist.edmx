@@ -4,27 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mis_assistantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="cart_transaction">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="printer_id" Type="int" Nullable="false" />
-          <Property Name="cartridge" Type="nvarchar" MaxLength="50" />
-          <Property Name="price" Type="int" />
-          <Property Name="quantity" Type="int" />
-          <Property Name="vender" Type="nvarchar" MaxLength="50" />
-          <Property Name="in_out" Type="nvarchar" MaxLength="1" />
-          <Property Name="date" Type="datetime" />
-        </EntityType>
+    <Schema Namespace="mis_assistantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="contact">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pno" Type="varchar" MaxLength="5" />
           <Property Name="department" Type="nvarchar" MaxLength="20" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="title" Type="nvarchar" MaxLength="20" />
           <Property Name="tel_office" Type="varchar" MaxLength="20" />
           <Property Name="tel_ext" Type="varchar" MaxLength="10" />
           <Property Name="tel_mobile" Type="varchar" MaxLength="20" />
@@ -43,37 +32,18 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="department" Type="nvarchar" MaxLength="50" />
-          <Property Name="ftype" Type="nvarchar" MaxLength="20" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
-          <Property Name="feature" Type="nvarchar" MaxLength="50" />
-          <Property Name="ip" Type="nvarchar" MaxLength="30" />
-          <Property Name="op" Type="nvarchar" MaxLength="50" />
-          <Property Name="op_bit" Type="varchar" MaxLength="10" />
-          <Property Name="op_copyright" Type="nchar" MaxLength="5" />
-          <Property Name="db" Type="nchar" MaxLength="50" />
-          <Property Name="office" Type="nchar" MaxLength="50" />
-          <Property Name="offcie_copyright" Type="nchar" MaxLength="5" />
-          <Property Name="antivirus" Type="nvarchar" MaxLength="50" />
-          <Property Name="note" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="printer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="department" Type="nvarchar" MaxLength="20" />
-          <Property Name="brand" Type="nvarchar" MaxLength="20" />
-          <Property Name="model" Type="nvarchar" MaxLength="20" />
-          <Property Name="type" Type="nvarchar" MaxLength="20" />
-          <Property Name="vender" Type="nvarchar" MaxLength="20" />
-          <Property Name="price" Type="money" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="ip" Type="nvarchar" MaxLength="30" />
-          <Property Name="cartridge_black" Type="nvarchar" MaxLength="50" />
-          <Property Name="cartridge_blue" Type="nvarchar" MaxLength="50" />
-          <Property Name="cartridge_red" Type="nvarchar" MaxLength="50" />
-          <Property Name="cartridge_yellow" Type="nvarchar" MaxLength="50" />
+          <Property Name="department" Type="nvarchar" MaxLength="255" />
+          <Property Name="ftype" Type="nvarchar" MaxLength="255" />
+          <Property Name="IP" Type="nvarchar" MaxLength="255" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="feature" Type="nvarchar" MaxLength="255" />
+          <Property Name="op" Type="nvarchar" MaxLength="255" />
+          <Property Name="op_bit" Type="nvarchar" MaxLength="255" />
+          <Property Name="op_copyright" Type="nchar" MaxLength="10" />
+          <Property Name="db" Type="nvarchar" MaxLength="255" />
+          <Property Name="office" Type="nvarchar" MaxLength="255" />
+          <Property Name="offcie_copyright" Type="nchar" MaxLength="10" />
+          <Property Name="antivirus" Type="nvarchar" MaxLength="255" />
           <Property Name="note" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="vender">
@@ -91,44 +61,62 @@
           <Property Name="quick_no" Type="varchar" MaxLength="5" />
           <Property Name="note" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="印表機">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="使用單位" Type="nvarchar" MaxLength="20" />
+          <Property Name="廠牌" Type="nvarchar" MaxLength="20" />
+          <Property Name="型號" Type="nvarchar" MaxLength="20" />
+          <Property Name="類別" Type="nvarchar" MaxLength="20" />
+          <Property Name="購買廠商" Type="nvarchar" MaxLength="20" />
+          <Property Name="價格" Type="money" />
+          <Property Name="購買日期" Type="datetime" />
+          <Property Name="IP位址" Type="nvarchar" MaxLength="30" />
+          <Property Name="碳粉匣_黑" Type="nvarchar" MaxLength="50" />
+          <Property Name="碳粉匣_青" Type="nvarchar" MaxLength="50" />
+          <Property Name="碳粉匣_紅" Type="nvarchar" MaxLength="50" />
+          <Property Name="碳粉匣_黃" Type="nvarchar" MaxLength="50" />
+          <Property Name="備註" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="異動記錄">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="印表機ID" Type="int" />
+          <Property Name="碳粉匣" Type="nvarchar" MaxLength="50" />
+          <Property Name="單價" Type="int" />
+          <Property Name="數量" Type="int" />
+          <Property Name="廠商" Type="nvarchar" MaxLength="50" />
+          <Property Name="入出" Type="nvarchar" MaxLength="1" />
+          <Property Name="日期" Type="datetime" />
+        </EntityType>
         <EntityContainer Name="mis_assistantModelStoreContainer">
-          <EntitySet Name="cart_transaction" EntityType="Self.cart_transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="equipment" EntityType="Self.equipment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="printer" EntityType="Self.printer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vender" EntityType="Self.vender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="印表機" EntityType="Self.印表機" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="異動記錄" EntityType="Self.異動記錄" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mis_assistantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="mis_assistantEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cart_transaction" EntityType="mis_assistantModel.cart_transaction" />
           <EntitySet Name="contact" EntityType="mis_assistantModel.contact" />
           <EntitySet Name="department" EntityType="mis_assistantModel.department" />
           <EntitySet Name="equipment" EntityType="mis_assistantModel.equipment" />
-          <EntitySet Name="printer" EntityType="mis_assistantModel.printer" />
           <EntitySet Name="vender" EntityType="mis_assistantModel.vender" />
-          <AssociationSet Name="printercart_transaction" Association="mis_assistantModel.printercart_transaction">
-            <End Role="printer" EntitySet="printer" />
-            <End Role="cart_transaction" EntitySet="cart_transaction" />
+          <EntitySet Name="印表機" EntityType="mis_assistantModel.印表機" />
+          <EntitySet Name="異動記錄" EntityType="mis_assistantModel.異動記錄" />
+          <AssociationSet Name="印表機異動記錄" Association="mis_assistantModel.印表機異動記錄">
+            <End Role="印表機" EntitySet="印表機" />
+            <End Role="異動記錄" EntitySet="異動記錄" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="cart_transaction">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="printer_id" Type="Int32" Nullable="false" />
-          <Property Name="cartridge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="price" Type="Int32" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="vender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="in_out" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="printer" Relationship="mis_assistantModel.printercart_transaction" FromRole="cart_transaction" ToRole="printer" />
-        </EntityType>
         <EntityType Name="contact">
           <Key>
             <PropertyRef Name="id" />
@@ -140,6 +128,8 @@
           <Property Name="tel_ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="tel_mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pno" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="department">
           <Key>
@@ -154,39 +144,19 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ftype" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="feature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ip" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="op" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="op_bit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="op_copyright" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="db" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="office" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="offcie_copyright" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="antivirus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="printer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="department" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="brand" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="model" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="vender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="ip" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="cartridge_black" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cartridge_blue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cartridge_red" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cartridge_yellow" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="department" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ftype" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="feature" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="op" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="op_bit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="op_copyright" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="db" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="office" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="offcie_copyright" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="antivirus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="cart_transaction" Relationship="mis_assistantModel.printercart_transaction" FromRole="printer" ToRole="cart_transaction" />
         </EntityType>
         <EntityType Name="vender">
           <Key>
@@ -203,41 +173,63 @@
           <Property Name="quick_no" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="printercart_transaction">
-          <End Type="mis_assistantModel.printer" Role="printer" Multiplicity="1" />
-          <End Type="mis_assistantModel.cart_transaction" Role="cart_transaction" Multiplicity="*" />
+        <EntityType Name="印表機">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="使用單位" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="廠牌" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="型號" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="類別" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="購買廠商" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="價格" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="購買日期" Type="DateTime" Precision="3" />
+          <Property Name="IP位址" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="碳粉匣_黑" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="碳粉匣_青" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="碳粉匣_紅" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="碳粉匣_黃" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="備註" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="異動記錄" Relationship="mis_assistantModel.印表機異動記錄" FromRole="印表機" ToRole="異動記錄" />
+        </EntityType>
+        <EntityType Name="異動記錄">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="印表機ID" Type="Int32" Nullable="false" />
+          <Property Name="碳粉匣" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="單價" Type="Int32" />
+          <Property Name="數量" Type="Int32" />
+          <Property Name="廠商" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="入出" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="日期" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="印表機" Relationship="mis_assistantModel.印表機異動記錄" FromRole="異動記錄" ToRole="印表機" />
+        </EntityType>
+        <Association Name="印表機異動記錄">
+          <End Type="mis_assistantModel.印表機" Role="印表機" Multiplicity="1" />
+          <End Type="mis_assistantModel.異動記錄" Role="異動記錄" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="printer">
-              <PropertyRef Name="id" />
+            <Principal Role="印表機">
+              <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="cart_transaction">
-              <PropertyRef Name="printer_id" />
+            <Dependent Role="異動記錄">
+              <PropertyRef Name="印表機ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="mis_assistantModelStoreContainer" CdmEntityContainer="mis_assistantEntities">
-          <EntitySetMapping Name="cart_transaction">
-            <EntityTypeMapping TypeName="mis_assistantModel.cart_transaction">
-              <MappingFragment StoreEntitySet="cart_transaction">
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="in_out" ColumnName="in_out" />
-                <ScalarProperty Name="vender" ColumnName="vender" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="cartridge" ColumnName="cartridge" />
-                <ScalarProperty Name="printer_id" ColumnName="printer_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="contact">
             <EntityTypeMapping TypeName="mis_assistantModel.contact">
               <MappingFragment StoreEntitySet="contact">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="pno" ColumnName="pno" />
                 <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="tel_mobile" ColumnName="tel_mobile" />
                 <ScalarProperty Name="tel_ext" ColumnName="tel_ext" />
@@ -268,30 +260,10 @@
                 <ScalarProperty Name="op_copyright" ColumnName="op_copyright" />
                 <ScalarProperty Name="op_bit" ColumnName="op_bit" />
                 <ScalarProperty Name="op" ColumnName="op" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
                 <ScalarProperty Name="feature" ColumnName="feature" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
                 <ScalarProperty Name="ftype" ColumnName="ftype" />
-                <ScalarProperty Name="department" ColumnName="department" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="printer">
-            <EntityTypeMapping TypeName="mis_assistantModel.printer">
-              <MappingFragment StoreEntitySet="printer">
-                <ScalarProperty Name="note" ColumnName="note" />
-                <ScalarProperty Name="cartridge_yellow" ColumnName="cartridge_yellow" />
-                <ScalarProperty Name="cartridge_red" ColumnName="cartridge_red" />
-                <ScalarProperty Name="cartridge_blue" ColumnName="cartridge_blue" />
-                <ScalarProperty Name="cartridge_black" ColumnName="cartridge_black" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="vender" ColumnName="vender" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="model" ColumnName="model" />
-                <ScalarProperty Name="brand" ColumnName="brand" />
                 <ScalarProperty Name="department" ColumnName="department" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -310,6 +282,40 @@
                 <ScalarProperty Name="contact" ColumnName="contact" />
                 <ScalarProperty Name="company" ColumnName="company" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="印表機">
+            <EntityTypeMapping TypeName="mis_assistantModel.印表機">
+              <MappingFragment StoreEntitySet="印表機">
+                <ScalarProperty Name="備註" ColumnName="備註" />
+                <ScalarProperty Name="碳粉匣_黃" ColumnName="碳粉匣_黃" />
+                <ScalarProperty Name="碳粉匣_紅" ColumnName="碳粉匣_紅" />
+                <ScalarProperty Name="碳粉匣_青" ColumnName="碳粉匣_青" />
+                <ScalarProperty Name="碳粉匣_黑" ColumnName="碳粉匣_黑" />
+                <ScalarProperty Name="IP位址" ColumnName="IP位址" />
+                <ScalarProperty Name="購買日期" ColumnName="購買日期" />
+                <ScalarProperty Name="價格" ColumnName="價格" />
+                <ScalarProperty Name="購買廠商" ColumnName="購買廠商" />
+                <ScalarProperty Name="類別" ColumnName="類別" />
+                <ScalarProperty Name="型號" ColumnName="型號" />
+                <ScalarProperty Name="廠牌" ColumnName="廠牌" />
+                <ScalarProperty Name="使用單位" ColumnName="使用單位" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="異動記錄">
+            <EntityTypeMapping TypeName="mis_assistantModel.異動記錄">
+              <MappingFragment StoreEntitySet="異動記錄">
+                <ScalarProperty Name="日期" ColumnName="日期" />
+                <ScalarProperty Name="入出" ColumnName="入出" />
+                <ScalarProperty Name="廠商" ColumnName="廠商" />
+                <ScalarProperty Name="數量" ColumnName="數量" />
+                <ScalarProperty Name="單價" ColumnName="單價" />
+                <ScalarProperty Name="碳粉匣" ColumnName="碳粉匣" />
+                <ScalarProperty Name="印表機ID" ColumnName="印表機ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

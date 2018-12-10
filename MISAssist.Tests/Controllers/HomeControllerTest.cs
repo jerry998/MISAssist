@@ -35,7 +35,7 @@ namespace MISAssist.Tests.Controllers
             ViewResult result = controller.About() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.AreEqual("仁愛之家．資訊室 ASP.NET MVC 應用程式.", result.ViewBag.Message);
         }
 
         [TestMethod]

@@ -18,6 +18,35 @@ namespace MISAssistant.Controllers
         // GET: Printers
         public ActionResult Index()
         {
+            //計算碳粉匣存量
+            var rawSqlCmd = db.Database.Connection.CreateCommand();
+            rawSqlCmd.CommandText = "select 碳粉匣, sum(CASE WHEN 入出 = '入' THEN 數量 ELSE - 1 * 數量 END) from 異動記錄 group by 碳粉匣";
+            rawSqlCmd.CommandType = CommandType.Text;
+
+            rawSqlCmd.Connection.Open();
+            var reader = rawSqlCmd.ExecuteReader();
+            List<CartViewModel> carts = new List<CartViewModel>();
+            while (reader.Read())
+            {
+                CartViewModel cart = new CartViewModel();
+                cart.CartNo = reader.GetValue(0).ToString();
+                cart.Quantity = Convert.ToInt32(reader.GetValue(1));
+                carts.Add(cart);
+            }
+            ViewBag.carts = carts;
+            rawSqlCmd.Connection.Close();
+
+            //Years
+            int thisYear = DateTime.Now.Year;
+            List<SelectListItem> listYears = new List<SelectListItem>();
+            for (int i = 0; i < 5; i++)
+            {
+                string strYear = (thisYear - i).ToString();
+                listYears.Add(new SelectListItem { Text = strYear, Value = strYear });
+            }
+            ViewBag.Years = listYears;
+
+            //Index
             string department = Request.QueryString["dept"];
             if (department == null || department == "") department = "全部";
             string[] paths = Request.Path.Split('/');
@@ -29,11 +58,11 @@ namespace MISAssistant.Controllers
             ViewBag.dept_index = GetDeptList(department, "Query");
             if (department.IndexOf("全部") > -1)
             {
-                return View(db.printer.OrderBy(c => c.department));
+                return View(db.印表機.OrderBy(c => c.使用單位));
             }
             else
             {
-                return View(db.printer.Where(d => d.department == department));
+                return View(db.印表機.Where(d => d.使用單位 == department));
             }
         }
         #endregion
@@ -46,7 +75,7 @@ namespace MISAssistant.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            printer printer = db.printer.Find(id);
+            印表機 printer = db.印表機.Find(id);
             if (printer == null)
             {
                 return HttpNotFound();
@@ -61,7 +90,7 @@ namespace MISAssistant.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            printer printer = db.printer.Find(id);
+            印表機 printer = db.印表機.Find(id);
             if (printer == null)
             {
                 return HttpNotFound();
@@ -82,11 +111,11 @@ namespace MISAssistant.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,department,brand,model,type,vender,price,date,ip,cartridge_black,cartridge_blue,cartridge_red,cartridge_yellow,note")] printer printer)
+        public ActionResult Create([Bind(Include = "id,department,brand,model,type,vender,price,date,ip,cartridge_black,cartridge_blue,cartridge_red,cartridge_yellow,note")] 印表機 printer)
         {
             if (ModelState.IsValid)
             {
-                db.printer.Add(printer);
+                db.印表機.Add(printer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -104,13 +133,13 @@ namespace MISAssistant.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Create([Bind(Include = "id,department,brand,model,type,vender,price,date,ip,cartridge_black,cartridge_blue,cartridge_red,cartridge_yellow,note")] printer printer)
+        public ActionResult _Create([Bind(Include = "id,department,brand,model,type,vender,price,date,ip,cartridge_black,cartridge_blue,cartridge_red,cartridge_yellow,note")] 印表機 printer)
         {
             if (ModelState.IsValid)
             {
-                db.printer.Add(printer);
+                db.印表機.Add(printer);
                 db.SaveChanges();
-                return RedirectToAction("Index", new { dept = printer.department });
+                return RedirectToAction("Index", new { dept = printer.使用單位 });
             }
             return PartialView(printer);
         }
@@ -124,7 +153,7 @@ namespace MISAssistant.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            printer printer = db.printer.Find(id);
+            印表機 printer = db.印表機.Find(id);
             if (printer == null)
             {
                 return HttpNotFound();
@@ -137,7 +166,7 @@ namespace MISAssistant.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,department,brand,model,type,vender,price,date,ip,cartridge_black,cartridge_blue,cartridge_red,cartridge_yellow,note")] printer printer)
+        public ActionResult Edit([Bind(Include = "ID,使用單位,廠牌,型號,類別,購買廠商,價格,購買日期,IP位址,碳粉匣_黑,碳粉匣_青,碳粉匣_紅,碳粉匣_黃,備註")] 印表機 printer)
         {
             if (ModelState.IsValid)
             {
@@ -155,25 +184,25 @@ namespace MISAssistant.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            printer printer = db.printer.Find(id);
+            印表機 printer = db.印表機.Find(id);
             if (printer == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.dept = GetDeptList(printer.department);
-            ViewBag.ptype = GetTypeList(printer.type);
+            ViewBag.dept = GetDeptList(printer.使用單位);
+            ViewBag.ptype = GetTypeList(printer.類別);
             return PartialView(printer);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Edit([Bind(Include = "id,department,brand,model,type,vender,price,date,ip,cartridge_black,cartridge_blue,cartridge_red,cartridge_yellow,note")] printer printer)
+        public ActionResult _Edit([Bind(Include = "ID,使用單位,廠牌,型號,類別,購買廠商,價格,購買日期,IP位址,碳粉匣_黑,碳粉匣_青,碳粉匣_紅,碳粉匣_黃,備註")] 印表機 printer)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(printer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", new { dept = printer.department });
+                return RedirectToAction("Index", new { dept = printer.使用單位 });
             }
             return PartialView(printer);
         }
@@ -187,7 +216,7 @@ namespace MISAssistant.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            printer printer = db.printer.Find(id);
+            印表機 printer = db.印表機.Find(id);
             if (printer == null)
             {
                 return HttpNotFound();
@@ -200,8 +229,8 @@ namespace MISAssistant.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            printer printer = db.printer.Find(id);
-            db.printer.Remove(printer);
+            印表機 printer = db.印表機.Find(id);
+            db.印表機.Remove(printer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -213,7 +242,7 @@ namespace MISAssistant.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            printer printer = db.printer.Find(id);
+            印表機 printer = db.印表機.Find(id);
             if (printer == null)
             {
                 return HttpNotFound();
@@ -226,10 +255,10 @@ namespace MISAssistant.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _DeleteConfirmed(int id)
         {
-            printer printer = db.printer.Find(id);
-            db.printer.Remove(printer);
+            印表機 printer = db.印表機.Find(id);
+            db.印表機.Remove(printer);
             db.SaveChanges();
-            return RedirectToAction("Index", new { dept = printer.department });
+            return RedirectToAction("Index", new { dept = printer.使用單位 });
         }
         #endregion
 
@@ -259,6 +288,7 @@ namespace MISAssistant.Controllers
             selectListItems.Add(new SelectListItem { Text = "傳達室", Value = "傳達室", Selected = (strSelected != "" && strSelected == "傳達室") ? true : false });
             selectListItems.Add(new SelectListItem { Text = "資訊室", Value = "資訊室", Selected = (strSelected != "" && strSelected == "資訊室") ? true : false });
             selectListItems.Add(new SelectListItem { Text = "測量室", Value = "測量室", Selected = (strSelected != "" && strSelected == "測量室") ? true : false });
+            selectListItems.Add(new SelectListItem { Text = "主任室", Value = "主任室", Selected = (strSelected != "" && strSelected == "主任室") ? true : false });
             return selectListItems;
         }
 

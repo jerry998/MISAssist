@@ -1,8 +1,9 @@
-﻿@model IEnumerable<MISAssist.Models.printer>
+﻿@model IEnumerable<MISAssist.Models.印表機>
 @using MISAssist.Models
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "印表機";
+    List<CartViewModel> Carts = (List<CartViewModel>)ViewBag.carts;
 }
 <p>
     @using (Html.BeginForm("Index", "Printers", FormMethod.Get))
@@ -12,22 +13,27 @@
         @Html.DropDownList("dept", (List<SelectListItem>)ViewBag.dept_index, new { @class = "btn btn-default" })
         <span>&nbsp;&nbsp;<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></span>
         <span>&nbsp;<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button></span>
+        <span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.DropDownList("years", (List<SelectListItem>)ViewBag.Years, new { @class = "btn btn-default" })&nbsp;年度成本
+        </span>
+        <span>&nbsp;<button type="button" onclick="annualCost()" class="btn btn-info" data-toggle="modal" data-target="#costModal" style="padding:4px 7px 2px 7px; margin:0px"><span class="glyphicon glyphicon-info-sign"></span></button></span>
     }
 </p>
 <table class="table table-striped" id="head_fixed_Printers">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.department)
+                @Html.DisplayNameFor(model => model.使用單位)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.brand)
+                @Html.DisplayNameFor(model => model.廠牌)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.model)
+                @Html.DisplayNameFor(model => model.型號)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ip)
+                @Html.DisplayNameFor(model => model.IP位址)
             </th>
             <th>
                 黑
@@ -42,7 +48,7 @@
                 黃
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.note)
+                @Html.DisplayNameFor(model => model.備註)
             </th>
             <th>功能</th>
         </tr>
@@ -52,85 +58,89 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.department)&nbsp;
+                    @Html.DisplayFor(modelItem => item.使用單位)&nbsp;
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.brand)&nbsp;
+                    @Html.DisplayFor(modelItem => item.廠牌)&nbsp;
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.model)&nbsp;
+                    @Html.DisplayFor(modelItem => item.型號)&nbsp;
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ip)&nbsp;
+                    <a href="http://@Html.DisplayFor(modelItem => item.IP位址)" target="_blank">@Html.DisplayFor(modelItem => item.IP位址)</a>&nbsp;
                 </td>
                 <td style="color:black;font-weight:bold">
                     @{
                         var c = " ";
-                        if (!string.IsNullOrEmpty(item.cartridge_black))
+                        if (!string.IsNullOrEmpty(item.碳粉匣_黑))
                         {
-                            var a = item.cart_transaction.Where(t => t.cartridge == item.cartridge_black).Where(t => t.in_out == "入").Sum(t => t.quantity);
-                            var b = item.cart_transaction.Where(t => t.cartridge == item.cartridge_black).Where(t => t.in_out == "出").Sum(t => t.quantity);
-                            c = "(" + (a - b) + ")";
+                            //var a = item.異動記錄.Where(t => t.碳粉匣 == item.碳粉匣_黑).Where(t => t.入出 == "入").Sum(t => t.數量);
+                            //var b = item.異動記錄.Where(t => t.碳粉匣 == item.碳粉匣_黑).Where(t => t.入出 == "出").Sum(t => t.數量);
+                            //c = "(" + (a - b) + ")";
+                            c = "(" + (Carts.Where(t => t.CartNo == item.碳粉匣_黑).Sum(t => t.Quantity)) + ")";
                         }
                         else
                         {
                             c = " ";
                         }
                     }
-                    @Html.ActionLink(" " + item.cartridge_black + c , "_Details", "cart_transaction", new { printer_id=item.id, cartridge = item.cartridge_black, color = "black" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:black;font-weight:bold" })&nbsp;
+                    @Html.ActionLink(" " + item.碳粉匣_黑 + c, "_DetailsEditable", "cart_transaction", new { printer_id = item.ID, cartridge = item.碳粉匣_黑, color = "black" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:black;font-weight:bold" })&nbsp;
                 </td>
                 <td style="color:deepskyblue;font-weight:bold">
                     @{
-                        if (!string.IsNullOrEmpty(item.cartridge_blue))
+                        if (!string.IsNullOrEmpty(item.碳粉匣_青))
                         {
-                            var a = item.cart_transaction.Where(t => t.cartridge == item.cartridge_blue).Where(t => t.in_out == "入").Sum(t => t.quantity);
-                            var b = item.cart_transaction.Where(t => t.cartridge == item.cartridge_blue).Where(t => t.in_out == "出").Sum(t => t.quantity);
-                            c = "(" + (a - b) + ")";
+                            //var a = item.異動記錄.Where(t => t.碳粉匣 == item.碳粉匣_青).Where(t => t.入出 == "入").Sum(t => t.數量);
+                            //var b = item.異動記錄.Where(t => t.碳粉匣 == item.碳粉匣_青).Where(t => t.入出 == "出").Sum(t => t.數量);
+                            //c = "(" + (a - b) + ")";
+                            c = "(" + (Carts.Where(t => t.CartNo == item.碳粉匣_青).Sum(t => t.Quantity)) + ")";
                         }
                         else
                         {
                             c = " ";
                         }
                     }
-                    @Html.ActionLink(" " + item.cartridge_blue + c, "_Details", "cart_transaction", new { printer_id = item.id, cartridge = item.cartridge_blue, color = "blue" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:blue;font-weight:bold" })&nbsp;
+                    @Html.ActionLink(" " + item.碳粉匣_青 + c, "_DetailsEditable", "cart_transaction", new { printer_id = item.ID, cartridge = item.碳粉匣_青, color = "blue" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:blue;font-weight:bold" })&nbsp;
                 </td>
                 <td style="color:red;font-weight:bold">
                     @{
-                        if (!string.IsNullOrEmpty(item.cartridge_red))
+                        if (!string.IsNullOrEmpty(item.碳粉匣_紅))
                         {
-                            var a = item.cart_transaction.Where(t => t.cartridge == item.cartridge_red).Where(t => t.in_out == "入").Sum(t => t.quantity);
-                            var b = item.cart_transaction.Where(t => t.cartridge == item.cartridge_red).Where(t => t.in_out == "出").Sum(t => t.quantity);
-                            c = "(" + (a - b) + ")";
+                            //var a = item.異動記錄.Where(t => t.碳粉匣 == item.碳粉匣_紅).Where(t => t.入出 == "入").Sum(t => t.數量);
+                            //var b = item.異動記錄.Where(t => t.碳粉匣 == item.碳粉匣_紅).Where(t => t.入出 == "出").Sum(t => t.數量);
+                            //c = "(" + (a - b) + ")";
+                            c = "(" + (Carts.Where(t => t.CartNo == item.碳粉匣_紅).Sum(t => t.Quantity)) + ")";
                         }
                         else
                         {
                             c = " ";
                         }
                     }
-                    @Html.ActionLink(" " + item.cartridge_red + c, "_Details", "cart_transaction", new { printer_id = item.id, cartridge = item.cartridge_red, color = "red" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:red;font-weight:bold" })&nbsp;
+                    @Html.ActionLink(" " + item.碳粉匣_紅 + c, "_DetailsEditable", "cart_transaction", new { printer_id = item.ID, cartridge = item.碳粉匣_紅, color = "red" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:red;font-weight:bold" })&nbsp;
                 </td>
                 <td style="color:orange;font-weight:bold">
                     @{
-                        if (!string.IsNullOrEmpty(item.cartridge_yellow))
+                        if (!string.IsNullOrEmpty(item.碳粉匣_黃))
                         {
-                            var a = item.cart_transaction.Where(t => t.cartridge == item.cartridge_yellow).Where(t => t.in_out == "入").Sum(t => t.quantity);
-                            var b = item.cart_transaction.Where(t => t.cartridge == item.cartridge_yellow).Where(t => t.in_out == "出").Sum(t => t.quantity);
-                            c = "(" + (a - b) + ")";
+                            //var a = item.異動記錄.Where(t => t.碳粉匣 == item.碳粉匣_黃).Where(t => t.入出 == "入").Sum(t => t.數量);
+                            //var b = item.異動記錄.Where(t => t.碳粉匣 == item.碳粉匣_黃).Where(t => t.入出 == "出").Sum(t => t.數量);
+                            //c = "(" + (a - b) + ")";
+                            c = "(" + (Carts.Where(t => t.CartNo == item.碳粉匣_黃).Sum(t => t.Quantity)) + ")";
                         }
                         else
                         {
                             c = " ";
                         }
                     }
-                    @Html.ActionLink(" " + item.cartridge_yellow + c, "_Details", "cart_transaction", new { printer_id = item.id, cartridge = item.cartridge_yellow, color = "orange" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:orange;font-weight:bold" })&nbsp;
+                    @Html.ActionLink(" " + item.碳粉匣_黃 + c, "_DetailsEditable", "cart_transaction", new { printer_id = item.ID, cartridge = item.碳粉匣_黃, color = "orange" }, new { data_target = "#cartModal", data_toggle = "modal", @style = "color:orange;font-weight:bold" })&nbsp;
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.note)&nbsp;
+                    @Html.DisplayFor(modelItem => item.備註)&nbsp;
                 </td>
                 <td>
-                    @Html.ActionLink(" ", "_Edit", new { id = item.id }, new { @class = "glyphicon glyphicon-pencil", data_target = "#editModal", data_toggle = "modal" }) |
-                    @Html.ActionLink(" ", "_Details", new { id = item.id }, new { @class = "glyphicon glyphicon-list-alt", data_target = "#detailModal", data_toggle = "modal" }) |
-                    @Html.ActionLink(" ", "_Delete", new { id = item.id }, new { @class = "glyphicon glyphicon-remove", data_target = "#deleteModal", data_toggle = "modal" })
+                    @Html.ActionLink(" ", "_Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-pencil", data_target = "#editModal", data_toggle = "modal" }) |
+                    @Html.ActionLink(" ", "_Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-list-alt", data_target = "#detailModal", data_toggle = "modal" }) |
+                    @Html.ActionLink(" ", "_Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", data_target = "#deleteModal", data_toggle = "modal" })
                 </td>
             </tr>
         }
@@ -144,7 +154,7 @@
 </style>
 
 <!-- Add -->
-@Html.Action("_Create", new { dept = @Html.DisplayNameFor(model => model.department) })
+@Html.Action("_Create", new { dept = @Html.DisplayNameFor(model => model.使用單位) })
 
 <!-- Details -->
 <div id="detailModal" class="modal fade" role="dialog">
@@ -186,6 +196,33 @@
     </div>
 </div>
 
+<!-- Delete Cartridge -->
+<div id="deleteCartModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 360px; top: 95px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!-- Add Cartridge -->
+<div id="AddCartModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 360px; top: 95px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!-- Annual Cost -->
+<div id="costModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 360px; top: 95px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
 @section scripts
 {
     <script>
@@ -213,5 +250,12 @@
         $(".modal-dialog").draggable({
             handle: ".modal-header"
         });
+
+        //年度成本
+        function annualCost() {
+            //alert($("#years :selected").text());
+            //location.href = "/cart_transaction/_AnnualCost?iYear=" + $("#years :selected").text();.modal-dialog.modal-content
+            $("#costModal").load("/cart_transaction/_AnnualCost?iYear=" + $("#years :selected").text());
+        }
     </script>
 }

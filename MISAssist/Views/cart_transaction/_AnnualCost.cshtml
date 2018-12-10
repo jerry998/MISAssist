@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AnnualCostViewModel>
+@using MISAssist.Models
+
+<div class="modal-dialog" style="width: 360px; top: 95px;">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header modal-header-primary">
+            <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">@ViewBag.year 年度成本</h4>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="text-align:center">使用單位</th>
+                    <th style="text-align:center">金額</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{Int32 intTotal = 0; }
+                @foreach (var t in Model)
+                {
+                    <tr>
+                        <td align="center">@t.Id</td>
+                        <td align="right" style="padding-right:80px">@String.Format("{0:#0,000}", t.Cost)</td>
+                    </tr>
+                    intTotal += t.Cost;
+                }
+                <tr>
+                    <td align="center">** 合　計 **</td>
+                    <td align="right" style="padding-right:80px">@String.Format("{0:#0,000}", intTotal)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

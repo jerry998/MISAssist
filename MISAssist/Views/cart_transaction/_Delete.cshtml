@@ -1,0 +1,78 @@
+﻿@model MISAssist.Models.異動記錄
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<!-- Modal content-->
+<div class="modal-header modal-header-primary">
+    <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">碳粉匣［刪除］</h4>
+</div>
+
+<div id="detailBody" class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.碳粉匣)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.碳粉匣)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.單價)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.單價)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.數量)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.數量)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.廠商)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.廠商)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.入出)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.入出)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.日期)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.日期)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="modal-footer modal-footer-primary">
+    @using (Html.BeginForm("_Delete"))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <span style="font-size:large;font-weight:bold;color:red">確定要刪除嗎？&nbsp;</span>
+        <button type="submit" class="btn btn-default">刪除</button>
+        <button type="button" class="btn btn-default" aria-label="Close" data-dismiss="modal">返回</button>
+    </div>
+    }
+</div>
+

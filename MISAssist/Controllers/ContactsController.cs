@@ -104,7 +104,7 @@ namespace MISAssist.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Create([Bind(Include = "id,department,name,tel_office,tel_ext,tel_mobile,note")] contact contact)
+        public ActionResult _Create([Bind(Include = "id,department,pno,name,title,tel_office,tel_ext,tel_mobile,note")] contact contact)
         {
             if (ModelState.IsValid)
             {
@@ -137,7 +137,7 @@ namespace MISAssist.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,department,name,tel_office,tel_ext,tel_mobile,note")] contact contact)
+        public ActionResult Edit([Bind(Include = "id,department,pno,name,title,tel_office,tel_ext,tel_mobile,note")] contact contact)
         {
             if (ModelState.IsValid)
             {
@@ -166,7 +166,7 @@ namespace MISAssist.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Edit([Bind(Include = "id,department,name,tel_office,tel_ext,tel_mobile,note")] contact contact)
+        public ActionResult _Edit([Bind(Include = "id,department,pno,name,title,tel_office,tel_ext,tel_mobile,note")] contact contact)
         {
             if (ModelState.IsValid)
             {

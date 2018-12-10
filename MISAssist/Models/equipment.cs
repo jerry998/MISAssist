@@ -17,9 +17,9 @@ namespace MISAssist.Models
         public int id { get; set; }
         public string department { get; set; }
         public string ftype { get; set; }
+        public string IP { get; set; }
         public string name { get; set; }
         public string feature { get; set; }
-        public string ip { get; set; }
         public string op { get; set; }
         public string op_bit { get; set; }
         public string op_copyright { get; set; }

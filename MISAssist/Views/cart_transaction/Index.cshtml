@@ -1,7 +1,7 @@
-﻿@model IEnumerable<MISAssist.Models.cart_transaction>
+﻿@model IEnumerable<MISAssist.Models.異動記錄>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "碳粉匣";
 }
 
 <h2>Index</h2>
@@ -12,25 +12,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.cartridge)
+            @Html.DisplayNameFor(model => model.碳粉匣)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.price)
+            @Html.DisplayNameFor(model => model.單價)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.quantity)
+            @Html.DisplayNameFor(model => model.數量)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.vender)
+            @Html.DisplayNameFor(model => model.廠商)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.in_out)
+            @Html.DisplayNameFor(model => model.入出)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayNameFor(model => model.日期)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.printer.department)
+            @Html.DisplayNameFor(model => model.印表機.使用單位)
         </th>
         <th></th>
     </tr>
@@ -38,30 +38,30 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.cartridge)
+            @Html.DisplayFor(modelItem => item.碳粉匣)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.price)
+            @Html.DisplayFor(modelItem => item.單價)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.quantity)
+            @Html.DisplayFor(modelItem => item.數量)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.vender)
+            @Html.DisplayFor(modelItem => item.廠商)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.in_out)
+            @Html.DisplayFor(modelItem => item.入出)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.date)
+            @Html.DisplayFor(modelItem => item.日期)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.printer.department)
+            @Html.DisplayFor(modelItem => item.印表機.使用單位)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

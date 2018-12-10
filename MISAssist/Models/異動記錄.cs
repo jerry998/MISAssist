@@ -12,17 +12,17 @@ namespace MISAssist.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class cart_transaction
+    public partial class 異動記錄
     {
-        public int id { get; set; }
-        public int printer_id { get; set; }
-        public string cartridge { get; set; }
-        public Nullable<int> price { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public string vender { get; set; }
-        public string in_out { get; set; }
-        public Nullable<System.DateTime> date { get; set; }
+        public int ID { get; set; }
+        public int 印表機ID { get; set; }
+        public string 碳粉匣 { get; set; }
+        public Nullable<int> 單價 { get; set; }
+        public Nullable<int> 數量 { get; set; }
+        public string 廠商 { get; set; }
+        public string 入出 { get; set; }
+        public Nullable<System.DateTime> 日期 { get; set; }
     
-        public virtual printer printer { get; set; }
+        public virtual 印表機 印表機 { get; set; }
     }
 }

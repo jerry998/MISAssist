@@ -25,11 +25,11 @@ namespace MISAssist.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<cart_transaction> cart_transaction { get; set; }
         public virtual DbSet<contact> contact { get; set; }
         public virtual DbSet<department> department { get; set; }
         public virtual DbSet<equipment> equipment { get; set; }
-        public virtual DbSet<printer> printer { get; set; }
         public virtual DbSet<vender> vender { get; set; }
+        public virtual DbSet<印表機> 印表機 { get; set; }
+        public virtual DbSet<異動記錄> 異動記錄 { get; set; }
     }
 }

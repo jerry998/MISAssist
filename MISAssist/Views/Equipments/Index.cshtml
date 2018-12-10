@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MISAssist.Models.equipment>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "資訊設備";
 }
 <p>
     @using (Html.BeginForm("Index", "Equipments", FormMethod.Get))
@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ip)
+                @Html.DisplayNameFor(model => model.IP)
             </th>
             <th style="text-align:center;">
                 @Html.DisplayNameFor(model => model.feature)
@@ -60,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.name)&nbsp;
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ip)&nbsp;
+                    @Html.DisplayFor(modelItem => item.IP)&nbsp;
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.feature)&nbsp;

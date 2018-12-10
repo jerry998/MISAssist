@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("MISAssistant", "Index", "Home", new { area = "" }, new { @class = "navbar-brand glyphicon glyphicon-grain", @style = "font-size:20pt;" })
+                @Html.ActionLink("MISAssist", "Index", "Home", new { area = "" }, new { @class = "navbar-brand glyphicon glyphicon-grain", @style = "font-size:20pt;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -67,6 +67,7 @@
                     <li>@Html.ActionLink("廠商", "Index", "Venders")</li>
                     <li>@Html.ActionLink("聯絡人", "Index", "Contacts")</li>
                     <li>@Html.ActionLink("關於", "About", "Home")</li>
+                    <!-- <li><a href"#">( Local DB )</a></li> -->
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

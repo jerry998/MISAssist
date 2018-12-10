@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5697da221336400f9c2b0cedfa84f6a6" Name="Diagram1">
-        <EntityTypeShape EntityType="mis_assistantModel.cart_transaction" Width="1.5" PointX="10.875" PointY="0.75" />
-        <EntityTypeShape EntityType="mis_assistantModel.contact" Width="1.5" PointX="2.5" PointY="0.75" />
-        <EntityTypeShape EntityType="mis_assistantModel.department" Width="1.5" PointX="0.5" PointY="0.75" />
-        <EntityTypeShape EntityType="mis_assistantModel.equipment" Width="1.5" PointX="4.5" PointY="0.75" />
-        <EntityTypeShape EntityType="mis_assistantModel.printer" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="mis_assistantModel.vender" Width="1.5" PointX="6.625" PointY="0.75" />
-        <AssociationConnector Association="mis_assistantModel.printercart_transaction" />
+        <EntityTypeShape EntityType="mis_assistantModel.contact" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="mis_assistantModel.department" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="mis_assistantModel.equipment" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="mis_assistantModel.vender" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="mis_assistantModel.印表機" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="mis_assistantModel.異動記錄" Width="1.5" PointX="4.75" PointY="4.75" />
+        <AssociationConnector Association="mis_assistantModel.印表機異動記錄" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

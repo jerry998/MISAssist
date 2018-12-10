@@ -31,7 +31,8 @@ namespace MISAssist
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/DataTables/css/jquery.dataTables.min.css"));
+                      "~/Content/DataTables/css/jquery.dataTables.min.css"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/my_css").Include(
                       "~/Content/jerryStyle.css"));

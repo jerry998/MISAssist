@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MISAssist.Models.contact>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "聯絡人";
 }
 <p>
     @using (Html.BeginForm("Index", "Contacts", FormMethod.Get))
@@ -20,7 +20,13 @@
                 @Html.DisplayNameFor(model => model.department)
             </th>
             <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.pno)
+            </th>
+            <th style="text-align:center;">
                 @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th style="text-align:center;">
+                @Html.DisplayNameFor(model => model.title)
             </th>
             <th style="text-align:center;">
                 @Html.DisplayNameFor(model => model.tel_office)
@@ -40,39 +46,61 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td style="text-align:center;">
-                    @Html.DisplayFor(modelItem => item.department)&nbsp;
-                </td>
-                <td style="text-align:center;">
-                    @Html.DisplayFor(modelItem => item.name)&nbsp;
-                </td>
-                <td style="text-align:center;">
-                    @Html.DisplayFor(modelItem => item.tel_office)&nbsp;
-                </td>
-                <td style="text-align:center;">
-                    @Html.DisplayFor(modelItem => item.tel_ext)&nbsp;
-                </td>
-                <td style="text-align:center;">
-                    @Html.DisplayFor(modelItem => item.tel_mobile)&nbsp;
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.note)&nbsp;
-                </td>
-                <td style="text-align:center;">
-                    @Html.ActionLink(" ", "_Edit", new { id = item.id }, new { @class = "glyphicon glyphicon-pencil", data_target = "#editModal", data_toggle = "modal" }) |
-                    @Html.ActionLink(" ", "_Details", new { id = item.id }, new { @class = "glyphicon glyphicon-list-alt", data_target = "#detailModal", data_toggle = "modal" }) |
-                    @Html.ActionLink(" ", "_Delete", new { id = item.id }, new { @class = "glyphicon glyphicon-remove", data_target = "#deleteModal", data_toggle = "modal" })
-                </td>
-            </tr>
+        <tr>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.department)&nbsp;
+            </td>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.pno)&nbsp;
+            </td>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.name)&nbsp;
+            </td>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.title)&nbsp;
+            </td>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.tel_office)&nbsp;
+            </td>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.tel_ext)&nbsp;
+            </td>
+            <td style="text-align:center;">
+                @Html.DisplayFor(modelItem => item.tel_mobile)&nbsp;
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.note)&nbsp;
+            </td>
+            <td style="text-align:center;">
+                @Html.ActionLink(" ", "_Edit", new { id = item.id }, new { @class = "glyphicon glyphicon-pencil", data_target = "#editModal", data_toggle = "modal" }) |
+                @Html.ActionLink(" ", "_Details", new { id = item.id }, new { @class = "glyphicon glyphicon-list-alt", data_target = "#detailModal", data_toggle = "modal" }) |
+                @Html.ActionLink(" ", "_Delete", new { id = item.id }, new { @class = "glyphicon glyphicon-remove", data_target = "#deleteModal", data_toggle = "modal" })
+            </td>
+        </tr>
         }
     </tbody>
 </table>
 
+<p style="font-size:14pt; font-weight:bolder">電話速撥：</p>
+<table id="tel" width="900">
+    <tr style="background-color:lightgrey">
+        <td>育幼所</td><td>新都所</td><td>慢護所</td><td>成功診所</td><td>精神院</td><td>康寧園</td><td>成護所</td><td>精復健</td>
+    </tr>
+    <tr>
+        <td>０２</td><td>０３</td><td>０４</td><td>０５</td><td>０６</td><td>０７</td><td>０８</td><td>１０</td>
+    </tr>
+</table>
 <style>
     .form-group {
         margin-bottom: 5px;
     }
+    #tel TD {
+        border-color:black;
+        border-style:solid;
+        border-width:1pt;
+        text-align:center;
+    }
+
 </style>
 
 <!-- Add -->
@@ -119,8 +147,9 @@
                 autoWidth: true,
                 paging: true,
                 columnDefs: [
-                    { "width": "162px", "targets": [1, 2, 4, 5] },
-                    { "width": "80px", "targets": [0, 3, 6] }
+                    { "width": "70px", "targets": [0, 1, 3, 4, 5] },
+                    { "width": "100px", "targets": [2, 6, 7] },
+                    { "width": "162", "targets": [8] }
                 ]
             });
         });

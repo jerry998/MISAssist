@@ -1,0 +1,244 @@
+﻿@model IEnumerable<MISAssist.Models.異動記錄>
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="~/Content/bootstrap-table.css" rel="stylesheet" />
+<link href="~/Content/x-editable/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+
+<script src="~/Scripts/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="~/Scripts/bootstrap-table.min.js"></script>
+<script src="~/Scripts/bootstrap-table-zh-TW.min.js"></script>  <!-- Bootstrap table 中文訊息 -->
+<script src="~/Scripts/bootstrap-table-editable.js"></script>
+
+<!-- Modal content-->
+<div class="modal-header modal-header-primary">
+    <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">碳粉匣［詳細］</h4>
+</div>
+<div id="detailBodyDiv" class="modal-body">
+    <table id="mainTable" id="cartDetailModal">
+        @if (Model != null && Model.Count() != 0)
+        {
+            <caption style="color:black;font-weight:bold; padding-left:25px; background-color:lightgray">
+                @Html.DisplayNameFor(model => model.碳粉匣) : <span style="color:@ViewBag.color;font-weight:bold">@Html.DisplayFor(model => model.First().碳粉匣)</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.DisplayNameFor(model => model.印表機.使用單位) : @Html.DisplayFor(model => model.First().印表機.使用單位) &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("新增", "_Create", new { id = ViewBag.PrinterId, cartId = ViewBag.CartId }, new { @class = "glyphicon glyphicon-plus", data_target = "#AddCartModal", data_toggle = "modal" })
+            </caption>
+        }
+        else
+        {
+            <caption style="color:black;font-weight:bold; padding-left:25px; background-color:lightgray">
+                @Html.DisplayNameFor(model => model.碳粉匣) : <span style="color:@ViewBag.color;font-weight:bold">@ViewBag.CartId</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.DisplayNameFor(model => model.印表機.使用單位) : @ViewBag.Dept &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("新增", "_Create", new { id = ViewBag.PrinterId, cartId = ViewBag.CartId }, new { @class = "glyphicon glyphicon-plus", data_target = "#AddCartModal", data_toggle = "modal" })
+            </caption>
+        }
+        <thead>
+            <tr>
+                <th data-visible="false">
+                    @Html.DisplayNameFor(model => model.ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.單價)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.數量)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.廠商)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.入出)
+                </th>
+                <th data-type="date">
+                    @Html.DisplayNameFor(model => model.日期)
+                </th>
+                <th>功能</th>
+            </tr>
+        </thead>
+        <tbody id="cartDetailBody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.單價)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.數量)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.廠商)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.入出)
+                    </td>
+                    <td data-type="date">
+                        @Html.DisplayFor(modelItem => item.日期)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink(" ", "_Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-pencil", data_target = "#editCartModal", data_toggle = "modal" }) |*@
+                        @Html.ActionLink(" ", "_Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", data_target = "#deleteCartModal", data_toggle = "modal" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-footer modal-footer-primary">
+    @*Html.ActionLink("返回", "Index", "Printers", new { dept = "" }, new { @class = "btn btn-default" }) *@
+    <button type="button" class="btn btn-default" aria-label="Close" data-dismiss="modal">返回</button>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#mainTable').bootstrapTable({
+            idField: "id",
+            pagination: true,
+            sidePagination: "client",
+            pageNumber: 1,
+            pageSize: 5,
+            pageList: [5, 10, 15, 20, 'ALL'],
+            paginationPreText: '上一頁',
+            paginationNextText: '下一頁',
+            toolbar: '#report_toolbar_search',
+            striped: true,
+            cache: false,
+            sortStable: true,
+            sortName: 'ordernumber',
+            sortOrder: "ASC",
+            search: false,
+            showColumns: false,
+            minimumCountColumns: 2,
+            strictSearch: false,
+            showRefresh: false,
+            clickToSelect: true,
+            columns: [
+                {
+                    field: 'ID',    //model 異動記錄的欄名
+                    title: 'ID',        //顯示的表格欄位標題
+                    align: 'center'
+                }, {
+                    field: '單價',    //model 異動記錄的欄名
+                    title: '單價',        //顯示的表格欄位標題
+                    align: 'center',
+                    editable: {
+                        type: 'text',
+                        title: '單價：',   //輸入框的標題
+                        validate: function (v) {
+                            if (!$.trim(v)) {
+                                return '不能為空';
+                            }
+                            if (isNaN(v)) return '單價必須是數字';
+                            var price = parseInt(v);
+                            if (price < 0) return '單價必須是正整數';
+                        }
+                    }
+                }, {
+                    field: '數量',    //model 異動記錄的欄名
+                    title: '數量',
+                    align: 'center',
+                    editable: {
+                        type: 'text',
+                        title: '數量：',
+                        validate: function (v) {
+                            if (!$.trim(v)) {
+                                return '不能為空';
+                            }
+                            if (isNaN(v)) return '單價必須是數字';
+                            var price = parseInt(v);
+                            if (price < 0) return '單價必須是正整數';
+                        }
+                    }
+                }, {
+                    field: '廠商',    //model 異動記錄的欄名
+                    title: '廠商',
+                    align: 'center',
+                    editable: {
+                        type: 'text',
+                        title: '廠商：',
+                        emptytext: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+                        validate: function (v) {
+
+                        }
+                    }
+                }, {
+                    field: '入出',    //model 異動記錄的欄名
+                    title: '入出',
+                    align: 'center',
+                    editable: {
+                        type: 'select',
+                        title: '入出：',
+                        source: [{
+                            text: "入", // 顯示的
+                            value: "入" // 實際的值
+                        }, {
+                            text: "出",
+                            value: "出"
+                        }],
+                        validate: function (v) {
+                            if (!$.trim(v)) {
+                                return '不能為空';
+                            }
+                        }
+                    },
+                    formatter: function (value, row, index) {
+                        return $.trim(value);
+                    }
+                }, {
+                    field: '日期',    //model 異動記錄的欄名
+                    title: '日期',
+                    align: 'center',
+                    sortable: 'true',
+                    editable: {
+                        type: 'date',
+                        placement: 'left',   //顯示在左側
+                        format: "yyyy-mm-dd",
+                        viewformat: "yyyy/mm/dd",
+                    },
+                    formatter: function (value, row, index) {
+                        var parts = value.split('/');
+                        var mydate = new Date(parts[0], parts[1] - 1, parts[2]);
+                        //onsole.log(mydate.toDateString());
+                        return $.trim(parts[0] + "-" + parts[1] + "-" + parts[2]);
+                    }
+                }, {
+                    field: 'func',
+                    title: '功能',
+                    align: 'center'
+                }
+            ],
+            onEditableSave: function (field, row, oldValue, $el) {
+                // field:修改的欄位
+                // row:修改後的資料(JSON Object)
+                // oldValue:修改前的值
+                // -------------------------------------------------
+                // 可用ajax方法去更新資料
+                $.ajax({
+                    type: "post",
+                    url: "/cart_transaction/_DetailsEditable",
+                    data: { 'data': row, 'field': field },
+                    dataType: 'JSON',
+                    success: function (data, status) {
+                        if (status == "success") {
+                            alert('修改成功');
+                        }
+                    },
+                    error: function () {
+                        //alert(field + "," + JSON.stringify(row) + "," + oldValue + "," + $el);
+                        alert('修改失敗');
+                    },
+                    complete: function () {
+
+                    }
+
+                });
+                // -------------------------------------------------
+            }
+        });
+    });
+</script>

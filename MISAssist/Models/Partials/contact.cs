@@ -17,9 +17,15 @@ namespace MISAssist.Models
             [Required]
             public string department { get; set; }
 
+            [DisplayName("員工編號")]
+            public string pno { get; set; }
+
             [DisplayName("姓名")]
             [Required]
             public string name { get; set; }
+
+            [DisplayName("職稱")]
+            public string title { get; set; }
 
             [DisplayName("公司電話")]
             public string tel_office { get; set; }

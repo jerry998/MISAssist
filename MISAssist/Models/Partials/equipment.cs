@@ -27,7 +27,7 @@ namespace MISAssist.Models
             public string feature { get; set; }
 
             [DisplayName("IP位址")]
-            public string ip { get; set; }
+            public string IP { get; set; }
 
             [DisplayName("作業系統")]
             public string op { get; set; }

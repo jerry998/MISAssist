@@ -1,59 +1,78 @@
-﻿@model IEnumerable<MISAssist.Models.cart_transaction>
+﻿@model IEnumerable<MISAssist.Models.異動記錄>
 @{
-    ViewBag.Title = "_Details";
+    ViewBag.Title = "Details";
 }
+
 <!-- Modal content-->
 <div class="modal-header modal-header-primary">
     <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">碳粉匣［詳細］</h4>
 </div>
 <div id="detailBody" class="modal-body">
-    <table class="table">
+    <table class="table" id="cartDetailModal">
         @if (Model != null && Model.Count() != 0)
         {
-            <caption style="color:black;font-weight:bold" >
-                @Html.DisplayNameFor(model => model.cartridge) : <span style = "color:@ViewBag.color;font-weight:bold">@Html.DisplayFor(model => model.First().cartridge)</span> &nbsp;&nbsp;&nbsp;&nbsp;
-                @Html.DisplayNameFor(model => model.printer.department) : @Html.DisplayFor(model => model.First().printer.department)
+            <caption style="color:black;font-weight:bold">
+                @Html.DisplayNameFor(model => model.碳粉匣) : <span style="color:@ViewBag.color;font-weight:bold">@Html.DisplayFor(model => model.First().碳粉匣)</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.DisplayNameFor(model => model.印表機.使用單位) : @Html.DisplayFor(model => model.First().印表機.使用單位) &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("新增", "_Create", new { id = ViewBag.PrinterId, cartId = ViewBag.CartId }, new { @class = "glyphicon glyphicon-plus", data_target = "#AddCartModal", data_toggle = "modal" })
             </caption>
         }
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.vender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.in_out)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date)
-            </th>
-        </tr>
-        @foreach (var item in Model)
+        else
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.vender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.in_out)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date)
-                </td>
-            </tr>
+            <caption style="color:black;font-weight:bold">
+                @Html.DisplayNameFor(model => model.碳粉匣) : <span style="color:@ViewBag.color;font-weight:bold">@ViewBag.CartId</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.DisplayNameFor(model => model.印表機.使用單位) : @ViewBag.Dept &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("新增", "_Create", new { id = ViewBag.PrinterId, cartId = ViewBag.CartId }, new { @class = "glyphicon glyphicon-plus", data_target = "#AddCartModal", data_toggle = "modal" })
+            </caption>
         }
-</table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.單價)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.數量)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.廠商)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.入出)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.日期)
+                </th>
+                <th>功能</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.單價)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.數量)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.廠商)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.入出)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.日期)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "_Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-pencil", data_target = "#editCartModal", data_toggle = "modal" }) |
+                        @Html.ActionLink(" ", "_Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", data_target = "#deleteCartModal", data_toggle = "modal" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div class="modal-footer modal-footer-primary">
